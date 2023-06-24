@@ -405,6 +405,7 @@ By calculating top 5 segments of restaurants in total sales. the scatterplot is 
 
 ## Top 5 categories of restaurants in YOY sales changes
 ```{r echo=TRUE}
+library(ggplot2)
 top100chains_tibble %>% group_by(MENU.CATEGORY) %>%
   summarise(count = n(), avg_YOYsaleschanges = mean(YOY.SALES.CHANGE)) %>%
   arrange(desc(avg_YOYsaleschanges)) %>% head(n = 5) -> top5_category_YOYsaleschanges
@@ -451,6 +452,7 @@ By calculating top 5 categories of restaurants in YOY sales changes, the boxplot
 
 ## Top 5 chain restaurants in units
 ```{r echo=TRUE}
+library(ggplot2)
 top100chains_tibble %>% arrange(desc(X2020.U.S..UNITS)) %>%
   select(CHAIN, Total.Units = X2020.U.S..UNITS) %>% head(5) -> top5chains_inTotalUnits
 df6 <- data.frame(top5chains_inTotalUnits, stringsAsFactors = FALSE)
@@ -472,6 +474,7 @@ By calculating the top 5 chain restaurants in units. the barplot is shown above.
 # Cross Elements Analysis
 ## Unit-Sale-Sales Change  Correlations
 ```{r echo=TRUE}
+library(ggplot2)
 plot_ly(top100chains_tibble, x = ~X2020.U.S..Sales...000.000., y = ~X2020.U.S..UNITS, text = ~CHAIN, type = 'scatter', mode = 'markers', marker = list(size = ~YOY.SALES.CHANGE, opacity = 0.5, color = 'rgb(255, 65, 54)')) %>% layout(title = 'Unit-Sale-Sales Change  Correlations',
          xaxis = list(title = 'Total Sales', showgrid = FALSE),
          yaxis = list(title = 'Total Units', showgrid = FALSE))
@@ -488,6 +491,7 @@ By analyzing the differences between unit, sales and YOY sales changes.
 
 ## Top 5 chain restaurants in YOY unit changes
 ```{r echo=TRUE}
+library(ggplot2)
 top100chains_tibble %>% select(CHAIN, YOY.UNIT.CHANGE) %>%
   arrange(desc(YOY.UNIT.CHANGE)) %>% head(5) -> top5chains_YOYUnitsChange
 df8 <- data.frame(top5chains_YOYUnitsChange, stringsAsFactors = FALSE)
